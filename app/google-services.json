@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "814112105704",
+    "firebase_url": "https://trackyourpal-732b9.firebaseio.com",
+    "project_id": "trackyourpal-732b9",
+    "storage_bucket": "trackyourpal-732b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:814112105704:android:a3bb2bf06917576e",
+        "android_client_info": {
+          "package_name": "com.example.allu.trackyourpal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "814112105704-ojff14dfr97j6mja0l9t6vkoesmb97kj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.allu.trackyourpal",
+            "certificate_hash": "23e6a0cf4c2b5a3382166e25004eaf34c54a21b0"
+          }
+        },
+        {
+          "client_id": "814112105704-864f1d7k586f1gun8arbr6gh4orjjuck.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhc8_7U1KhNzfZltfCT9hncymu-H9aH28"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "814112105704-864f1d7k586f1gun8arbr6gh4orjjuck.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
