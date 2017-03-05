@@ -5,10 +5,17 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.allu.trackyourpal.R;
+import com.example.allu.trackyourpal.User_Utils.User_utils;
 import com.example.allu.trackyourpal.Utils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -16,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     String TAG = "LoginActivity";
     Utils utils;
+    User_utils user_utils;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -23,11 +31,15 @@ public class LoginActivity extends AppCompatActivity {
     TextView LoginTitle;
     Typeface Login_typeface;
 
+    Button Login_button;
+    EditText Login_email,Login_password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
+
 
         utils = new Utils(this);
 
@@ -35,18 +47,44 @@ public class LoginActivity extends AppCompatActivity {
         Login_typeface = Typeface.createFromAsset(getAssets(),"fonts/Gorditas-Regular.ttf");
         LoginTitle.setTypeface(Login_typeface);
 
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
+        Login_button = (Button)findViewById(R.id.btn_login);
+        Login_email = (EditText)findViewById(R.id.edit_email);
+        Login_password = (EditText)findViewById(R.id.edit_password);
+
+        Login_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                }else{
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
+            public void onClick(View view) {
+                Login();
             }
-        };
+        });
+
+        user_utils = new User_utils(this);
+        mAuth = User_utils.getmAuth();
+        mAuthListener = User_utils.getmAuthListener();
+    }
+
+    void Login(){
+        String Emailid,Password;
+        Emailid = Login_email.getText().toString();
+        Password = Login_password.getText().toString();
+        if(Emailid.isEmpty() || Emailid.trim().equals("") || Password.isEmpty() || Password.trim().equals("")){
+            utils.Toast("Enter the Username and Password..");
+            return;
+        }else{
+            mAuth.signInWithEmailAndPassword(Emailid,Password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+                    if (!task.isSuccessful()) {
+                        Log.w(TAG, "signInWithEmail", task.getException());
+                        utils.Toast("Authentication Failed");
+                    }else{
+                        utils.Goto(MainActivity.class);
+                    }
+
+                }
+            });
+        }
     }
 
     @Override
