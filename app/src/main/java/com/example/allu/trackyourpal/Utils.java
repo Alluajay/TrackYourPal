@@ -26,31 +26,6 @@ public class Utils {
         mContext.startActivity(i);
     }
 
-    public void Logout(){
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.remove("uid");
-        editor.commit();
-       // Goto(LoginActivity.class);
-    }
-
-    public void comm_logout(){
-        if(preferences.contains("uid")){
-            Logout();
-        }else if(preferences.contains("id")){
-            Logout_stud();
-        }
-    }
-
-    public void Logout_stud(){
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.remove("id");
-        editor.remove("rno");
-        editor.remove("name");
-        editor.remove("year");
-        editor.remove("dept");
-        editor.commit();
-       // Goto(LoginActivity.class);
-    }
 
     public void Toast(String msg){
         Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();

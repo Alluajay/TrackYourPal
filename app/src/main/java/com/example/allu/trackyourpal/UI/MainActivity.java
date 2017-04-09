@@ -1,13 +1,19 @@
 package com.example.allu.trackyourpal.UI;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.allu.trackyourpal.GPS.GPSService;
 import com.example.allu.trackyourpal.GPS.GPS_Util;
 import com.example.allu.trackyourpal.R;
 import com.example.allu.trackyourpal.Utils;
@@ -17,11 +23,23 @@ public class MainActivity extends AppCompatActivity {
 
     Utils utils;
 
+    Button GOTO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         utils = new Utils(this);
+
+        GOTO = (Button)findViewById(R.id.GeoActivity);
+        GOTO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, GPSService.class);
+                startService(i);
+            }
+        });
+
         RequestPermission();
     }
 
@@ -32,6 +50,19 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, PERMISSION_ACCESS_COARSE_LOCATION);
             }
+        }
+    }
+
+    void GpsFunction(){
+        LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+        boolean enabled = service
+                .isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        if (!enabled) {
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }else{
+
         }
     }
 
@@ -49,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
     @Override
     public void onBackPressed() {
         finish();

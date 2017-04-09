@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -31,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView LoginTitle;
     Typeface Login_typeface;
 
-    Button Login_button;
+    Button Login_button,btn_signup_default;
     EditText Login_email,Login_password;
 
     @Override
@@ -50,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         Login_button = (Button)findViewById(R.id.btn_login);
         Login_email = (EditText)findViewById(R.id.edit_email);
         Login_password = (EditText)findViewById(R.id.edit_password);
+        btn_signup_default = (Button)findViewById(R.id.btn_signup_default);
 
         Login_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,11 +60,30 @@ public class LoginActivity extends AppCompatActivity {
                 Login();
             }
         });
+        btn_signup_default.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e(TAG,"clicked");
+                //utils.Goto(MainActivity.class);
+               utils.Goto(SignupActivity.class);
+            }
+        });
 
         user_utils = new User_utils(this);
-        mAuth = User_utils.getmAuth();
-        mAuthListener = User_utils.getmAuthListener();
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                }else{
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+            }
+        };
     }
+
 
     void Login(){
         String Emailid,Password;
