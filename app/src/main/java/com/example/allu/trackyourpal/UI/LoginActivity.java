@@ -1,5 +1,6 @@
 package com.example.allu.trackyourpal.UI;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -71,6 +72,11 @@ public class LoginActivity extends AppCompatActivity {
 
         user_utils = new User_utils(this);
         mAuth = FirebaseAuth.getInstance();
+
+        if (mAuth.getCurrentUser() != null) {
+            utils.Goto(HomeActivity.class);
+            finish();
+        }
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -101,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.w(TAG, "signInWithEmail", task.getException());
                         utils.Toast("Authentication Failed");
                     }else{
-                        utils.Goto(MainActivity.class);
+                        utils.Goto(HomeActivity.class);
                     }
 
                 }

@@ -18,7 +18,7 @@ import com.example.allu.trackyourpal.GPS.GPS_Util;
 import com.example.allu.trackyourpal.R;
 import com.example.allu.trackyourpal.Utils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     final int PERMISSION_ACCESS_COARSE_LOCATION = 1;
 
     Utils utils;
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         utils = new Utils(this);
 
-        GOTO = (Button)findViewById(R.id.GeoActivity);
+        GOTO = (Button)findViewById(R.id.btn_GeoActivity);
         GOTO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,5 +86,32 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
         return;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_addFriend:
+                utils.Goto(AddFriend.class);
+                break;
+
+            case R.id.btn_viewFriends:
+                utils.Goto(HomeActivity.class);
+                break;
+
+            case R.id.btn_GeoActivity:
+
+                break;
+
+            case R.id.btn_createtour:
+                utils.Goto(TourActivity.class);
+                break;
+            case R.id.btn_friendstour:
+                utils.Goto(FriendsTourActivity.class);
+                break;
+            case R.id.btn_yourtour:
+                utils.Goto(TourViewActivity.class);
+                break;
+        }
     }
 }

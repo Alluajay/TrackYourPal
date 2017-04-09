@@ -26,6 +26,40 @@ public class Utils {
         mContext.startActivity(i);
     }
 
+    public boolean isEmptyString(String... Args){
+        for (String arg : Args){
+            if(arg.trim().equals("") || arg == null){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isEmptyint(int... Args){
+        for (int arg : Args){
+            if(arg == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isEmptylong(long... Args){
+        for (long arg : Args){
+            if(arg == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String usernameFromEmail(String email) {
+        if (email.contains("@")) {
+            return email.split("@")[0];
+        } else {
+            return email;
+        }
+    }
 
     public void Toast(String msg){
         Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();

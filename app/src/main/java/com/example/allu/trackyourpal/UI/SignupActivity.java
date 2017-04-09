@@ -119,6 +119,7 @@ public class SignupActivity extends AppCompatActivity {
         User user = new User(name, email);
 
         mDatabase.child("users").child(userId).setValue(user);
+
         //ArrayList<String> userNames = new ArrayList<>();
         //userNames.add(name);
         //mDatabase.child("usernamelist").setValue(userNames);

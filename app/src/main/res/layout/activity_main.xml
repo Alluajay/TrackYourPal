@@ -14,6 +14,43 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/GeoActivity"/>
+        android:text="Geo Activity"
+        android:onClick="onClick"
+        android:id="@+id/btn_GeoActivity"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add Friends"
+        android:onClick="onClick"
+        android:id="@+id/btn_addFriend"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Friends"
+        android:onClick="onClick"
+        android:id="@+id/btn_viewFriends"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_createtour"
+        android:onClick="onClick"
+        android:text="Create Tour"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_yourtour"
+        android:onClick="onClick"
+        android:text="Your Tour"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_friendstour"
+        android:onClick="onClick"
+        android:text="Friends Tour"/>
+
+
+
 
 </LinearLayout>
