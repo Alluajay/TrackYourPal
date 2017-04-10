@@ -11,10 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.allu.trackyourpal.GPS.GPSService;
-import com.example.allu.trackyourpal.GPS.GPS_Util;
 import com.example.allu.trackyourpal.R;
 import com.example.allu.trackyourpal.Utils;
 
@@ -35,8 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GOTO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, GPSService.class);
-                startService(i);
+
             }
         });
 
@@ -66,20 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_ACCESS_COARSE_LOCATION: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    GPS_Util.setGPS_Status_Flag(true);
-                } else {
-                    GPS_Util.setGPS_Status_Flag(false);
-                }
-                return;
-            }
-        }
-    }
+
 
 
     @Override
@@ -103,9 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
 
-            case R.id.btn_createtour:
-                utils.Goto(TourActivity.class);
-                break;
+
             case R.id.btn_friendstour:
                 utils.Goto(FriendsTourActivity.class);
                 break;

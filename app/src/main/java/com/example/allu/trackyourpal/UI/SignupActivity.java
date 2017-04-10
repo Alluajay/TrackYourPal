@@ -12,6 +12,10 @@ import android.widget.Toast;
 import com.example.allu.trackyourpal.POJO.User;
 import com.example.allu.trackyourpal.R;
 import com.example.allu.trackyourpal.Utils;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+
+import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Friends;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -33,6 +39,8 @@ public class SignupActivity extends AppCompatActivity {
 
     EditText Edit_Emailid,Edit_Pass;
     Button Btn_Signup;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +48,8 @@ public class SignupActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         utils = new Utils(this);
+
+
 
         Edit_Emailid = (EditText)findViewById(R.id.edit_email);
         Edit_Pass = (EditText)findViewById(R.id.edit_password);
@@ -119,17 +129,8 @@ public class SignupActivity extends AppCompatActivity {
         User user = new User(name, email);
 
         mDatabase.child("users").child(userId).setValue(user);
+        mDatabase.child(Fire_Friends).child(userId);
 
-        //ArrayList<String> userNames = new ArrayList<>();
-        //userNames.add(name);
-        //mDatabase.child("usernamelist").setValue(userNames);
-    }
-
-    void PushData(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("UID");
-
-        myRef.setValue("Hello, World!");
     }
 
 

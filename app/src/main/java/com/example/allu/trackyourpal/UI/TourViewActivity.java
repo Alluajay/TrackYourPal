@@ -1,6 +1,10 @@
 package com.example.allu.trackyourpal.UI;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.allu.trackyourpal.Adapter.Adapter_Message;
+import com.example.allu.trackyourpal.GPS.GPSTracker;
 import com.example.allu.trackyourpal.POJO.Message;
 import com.example.allu.trackyourpal.R;
 import com.example.allu.trackyourpal.Utils;
@@ -58,6 +63,7 @@ public class TourViewActivity extends AppCompatActivity implements OnMapReadyCal
     LatLng latLng;
 
     GoogleMap googleMap;
+    Marker marker;
 
     EditText Edit_message;
 
@@ -65,6 +71,8 @@ public class TourViewActivity extends AppCompatActivity implements OnMapReadyCal
     ArrayList<Message> messages;
     Adapter_Message adapter_message;
     long lenght;
+
+
 
 
     @Override
@@ -75,6 +83,7 @@ public class TourViewActivity extends AppCompatActivity implements OnMapReadyCal
         //Uid = getIntent().getStringExtra(Intent_uid);
 
         mAuth = FirebaseAuth.getInstance();
+
 
         Edit_message = (EditText)findViewById(R.id.edit_msg);
 
@@ -117,6 +126,8 @@ public class TourViewActivity extends AppCompatActivity implements OnMapReadyCal
         });
     }
 
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -127,6 +138,7 @@ public class TourViewActivity extends AppCompatActivity implements OnMapReadyCal
     protected void onPause() {
         super.onPause();
         mDatabase.child(Fire_Online).setValue(false);
+
     }
 
     @Override
@@ -173,14 +185,15 @@ public class TourViewActivity extends AppCompatActivity implements OnMapReadyCal
 
     void setmarker(){
         Log.e(TAG,"markerAdded");
-        googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(lat, longi))
-                .title("Marker"));
+        marker.setPosition(new LatLng(lat,longi));
+        googleMap.setBuildingsEnabled(true);
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(),14));
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
+        marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(lat,longi)));
         getLatLong();
     }
 

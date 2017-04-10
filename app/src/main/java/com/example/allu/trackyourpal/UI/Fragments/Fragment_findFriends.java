@@ -29,7 +29,7 @@ import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Users;
 
 public class Fragment_findFriends extends Fragment {
 
-    String TAG = Fragment_Friends.class.getSimpleName();
+    String TAG = Fragment_findFriends.class.getSimpleName();
     FirebaseDatabase mDatabase;
     FirebaseAuth auth;
     ArrayList<String> UidList;
@@ -41,7 +41,7 @@ public class Fragment_findFriends extends Fragment {
 
      public Fragment_findFriends() {
         // Required empty public constructor
-    }
+     }
 
     public static Fragment_findFriends newInstance(String param1, String param2) {
         Fragment_findFriends fragment = new Fragment_findFriends();
@@ -59,8 +59,7 @@ public class Fragment_findFriends extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_fragment_find_friends, container, false);
         recyclerView_frnd_requests = (RecyclerView)v.findViewById(R.id.recy_friends);
         recyclerView_frnd_requests.setItemAnimator(new DefaultItemAnimator());
@@ -77,6 +76,9 @@ public class Fragment_findFriends extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userArrayList = new ArrayList<User>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    if(snapshot.getKey().equals(auth.getCurrentUser().getUid())){
+                        continue;
+                    }
                     User user = snapshot.getValue(User.class);
                     user.UID = snapshot.getKey();
                     user.request = 2;
@@ -125,6 +127,5 @@ public class Fragment_findFriends extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-
     }
 }

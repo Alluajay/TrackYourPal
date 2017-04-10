@@ -5,6 +5,7 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="google_map_api">AIzaSyC01AoGbMUu0SAs4BWmygkGn7lyqaothEQ</string>
+    <string name="google_web_client_id">814112105704-864f1d7k586f1gun8arbr6gh4orjjuck.apps.googleusercontent.com</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
