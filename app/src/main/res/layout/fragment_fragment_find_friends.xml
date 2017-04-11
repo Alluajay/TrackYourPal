@@ -19,10 +19,12 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/edit_findfriend"
                 android:hint="Enter friends username"/>
+
             <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_findfriend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/fab_findfriend"/>
+                android:src="@drawable/ic_search_black_24dp" />
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView

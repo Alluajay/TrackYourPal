@@ -139,9 +139,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             utils.Toast("Enter the Username and Password..");
             return;
         }else{
+            utils.ShowDialog();
             mAuth.signInWithEmailAndPassword(Emailid,Password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+                    utils.CloseDialog();
                     Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
                     if (!task.isSuccessful()) {
                         Log.w(TAG, "signInWithEmail", task.getException());

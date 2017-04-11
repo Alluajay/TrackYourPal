@@ -29,15 +29,15 @@ public class SplashActivity extends AwesomeSplash {
 
         //Choose LOGO OR PATH; if you don't provide String value for path it's logo by default
 
-        //Customize Logo
-        configSplash.setLogoSplash(R.mipmap.ic_launcher); //or any other drawable
+        /*//Customize Logo
+        configSplash.setLogoSplash(R.drawable.trackicon); //or any other drawable
         configSplash.setAnimLogoSplashDuration(1000); //int ms
         configSplash.setAnimLogoSplashTechnique(Techniques.Bounce); //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
-
+*/
         //Customize Title
         configSplash.setTitleSplash("Track Your Pal");
         configSplash.setTitleTextColor(R.color.colorAccent);
-        configSplash.setTitleTextSize(50f); //float value
+        configSplash.setTitleTextSize(40f); //float value
         configSplash.setAnimTitleDuration(2000);
         configSplash.setAnimTitleTechnique(Techniques.FadeInLeft);
         configSplash.setTitleFont("fonts/Gorditas-Regular.ttf"); //provide string to your font located in assets/fonts/

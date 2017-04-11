@@ -51,6 +51,8 @@ public class HomeActivity extends AppCompatActivity {
 
         RequestPermission();
 
+        setTitle("Track Your Pal !");
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         auth = FirebaseAuth.getInstance();

@@ -19,6 +19,7 @@ import android.widget.EditText;
 import com.example.allu.trackyourpal.Adapter.Adapter_Message;
 import com.example.allu.trackyourpal.GPS.GPSTracker;
 import com.example.allu.trackyourpal.POJO.Message;
+import com.example.allu.trackyourpal.POJO.User;
 import com.example.allu.trackyourpal.R;
 import com.example.allu.trackyourpal.Utils;
 import com.google.android.gms.maps.CameraUpdate;
@@ -46,6 +47,7 @@ import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Online;
 import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Tour;
 import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Users;
 import static com.example.allu.trackyourpal.User_Utils.Attributes.Intent_uid;
+import static com.example.allu.trackyourpal.User_Utils.Attributes.Intent_username;
 
 
 public class TourViewActivity extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener {
@@ -53,8 +55,10 @@ public class TourViewActivity extends AppCompatActivity implements OnMapReadyCal
     String TAG = TourViewActivity.class.getSimpleName();
     Utils utils;
     MapFragment mapFragment;
+    Context context;
 
     String Uid;
+    String Username;
 
     DatabaseReference mDatabase;
     FirebaseAuth mAuth;
@@ -80,6 +84,8 @@ public class TourViewActivity extends AppCompatActivity implements OnMapReadyCal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour_view);
         utils = new Utils(this);
+        context = this;
+
         //Uid = getIntent().getStringExtra(Intent_uid);
 
         mAuth = FirebaseAuth.getInstance();
@@ -98,8 +104,9 @@ public class TourViewActivity extends AppCompatActivity implements OnMapReadyCal
 
 
         Uid = getIntent().getStringExtra(Intent_uid);
+        Username = getIntent().getStringExtra(Intent_username);
+        setTitle(Username+"'s tour");
         mDatabase = FirebaseDatabase.getInstance().getReference().child(Fire_Users).child(Uid);
-        mDatabase.child(Fire_Online).setValue(true);
 
 
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
@@ -125,8 +132,6 @@ public class TourViewActivity extends AppCompatActivity implements OnMapReadyCal
             }
         });
     }
-
-
 
     @Override
     public void onBackPressed() {

@@ -18,7 +18,7 @@ public abstract class Attributes {
     public static final String Fire_Username = "Username";
 
 
-
+    public static final String Intent_username = "username";
     public static final String Intent_uid = "uid";
 
 

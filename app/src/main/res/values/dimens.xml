@@ -11,7 +11,7 @@
     <dimen name="text_size_message">24dp</dimen>
 
 
-    <dimen name="text_size_user_request">24dp</dimen>
+    <dimen name="text_size_user_request">20dp</dimen>
     <dimen name="default_card_elevation">4dp</dimen>
     <dimen name="default_padding">4dp</dimen>
     <dimen name="default_margin">4dp</dimen>

@@ -90,10 +90,12 @@ public class SignupActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
             return;
         }
+        utils.ShowDialog();
         mAuth.createUserWithEmailAndPassword(Emailid, Pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        utils.CloseDialog();
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
                         if (!task.isSuccessful()) {
                             Log.e(TAG,task.toString());

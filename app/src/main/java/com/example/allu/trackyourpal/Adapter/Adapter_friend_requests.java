@@ -17,12 +17,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Friends;
 import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Users;
 import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_requests;
 import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_your_requests;
 import static com.example.allu.trackyourpal.User_Utils.Attributes.Intent_uid;
+import static com.example.allu.trackyourpal.User_Utils.Attributes.Intent_username;
 
 /**
  * Created by allu on 4/9/17.
@@ -34,6 +36,12 @@ public class Adapter_friend_requests extends RecyclerView.Adapter<ViewHolder_req
     FirebaseDatabase database;
     FirebaseAuth auth;
 
+    public Adapter_friend_requests(Set<User> userArrayList, Context context, FirebaseDatabase database, FirebaseAuth auth) {
+        this.userArrayList = new ArrayList<>(userArrayList);
+        this.context = context;
+        this.database = database;
+        this.auth = auth;
+    }
     public Adapter_friend_requests(ArrayList<User> userArrayList, Context context, FirebaseDatabase database, FirebaseAuth auth) {
         this.userArrayList = userArrayList;
         this.context = context;
@@ -57,6 +65,7 @@ public class Adapter_friend_requests extends RecyclerView.Adapter<ViewHolder_req
                 @Override
                 public void onClick(View view) {
                     Intent i = new Intent(context, TourViewActivity.class);
+                    i.putExtra(Intent_username,user.Username);
                     i.putExtra(Intent_uid,user.UID);
                     context.startActivity(i);
                 }

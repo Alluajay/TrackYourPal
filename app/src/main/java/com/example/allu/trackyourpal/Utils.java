@@ -1,5 +1,6 @@
 package com.example.allu.trackyourpal;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,10 +16,26 @@ public class Utils {
 
     Context mContext;
     SharedPreferences preferences;
+    ProgressDialog progressDialog;
 
     public Utils(Context context){
         mContext = context;
         preferences = mContext.getSharedPreferences(pref_string,Context.MODE_PRIVATE);
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Authenticating please wait");
+        progressDialog.setCancelable(false);
+    }
+
+    public void ShowDialog(){
+        if(!progressDialog.isShowing()){
+            progressDialog.show();
+        }
+    }
+
+    public void CloseDialog(){
+        if(progressDialog.isShowing()){
+            progressDialog.cancel();
+        }
     }
 
     public void Goto(Class cls){
