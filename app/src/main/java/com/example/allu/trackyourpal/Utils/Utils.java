@@ -1,10 +1,12 @@
-package com.example.allu.trackyourpal;
+package com.example.allu.trackyourpal.Utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
+
+import com.example.allu.trackyourpal.R;
 
 
 /**
@@ -22,17 +24,17 @@ public class Utils {
         mContext = context;
         preferences = mContext.getSharedPreferences(pref_string,Context.MODE_PRIVATE);
         progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Authenticating please wait");
+        progressDialog.setMessage(context.getString(R.string.progressbar));
         progressDialog.setCancelable(false);
     }
 
-    public void ShowDialog(){
+    public void showDialog(){
         if(!progressDialog.isShowing()){
             progressDialog.show();
         }
     }
 
-    public void CloseDialog(){
+    public void closeDialog(){
         if(progressDialog.isShowing()){
             progressDialog.cancel();
         }
@@ -78,7 +80,7 @@ public class Utils {
         }
     }
 
-    public void Toast(String msg){
+    public void toast(String msg){
         Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
     }
 }

@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/edit_email"
-                android:hint="Email id"
+                android:hint="@string/emailid"
                 android:layout_margin="4dp"/>
             <EditText
                 android:layout_width="match_parent"
@@ -44,12 +44,12 @@
                 android:id="@+id/edit_password"
                 android:layout_margin="4dp"
                 android:inputType="textPassword"
-                android:hint="Password"/>
+                android:hint="@string/password"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_login"
-                android:text="Login"
+                android:text="@string/login"
                 android:background="@color/login_button_bg_color"
                 android:textColor="@color/login_button_text_color"/>
             <TextView
@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_signup_default"
-                android:text="Create account using Email id"/>
+                android:text="@string/signupbtn"/>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

@@ -9,4 +9,33 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="emailid">Email id</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="loginsuccess">Login successful</string>
+    <string name="signup">signup</string>
+    <string name="enteruserpass">Enter the Username and Password..</string>
+    <string name="signupbtn">Create account using Email id</string>
+    <string name="enterfriendname">Enter friends username</string>
+    <string name="entermessage">Enter the message</string>
+    <string name="request">Request</string>
+
+    <string name="enterallfeilds">Enter all fields</string>
+    <string name="autherror">Authentication failed!..</string>
+    <string name="usercreationsucc">User created successfully!..</string>
+    <string name="passtooshort">Password too short, enter minimum 6 characters!</string>
+    <string name="errorinsigin">error in sigining up</string>
+    <string name="logout">Logout</string>
+
+    <string name="AcceptFriend">Accept Friend</string>
+    <string name="RequestFriend">Request Friend</string>
+
+    <string name="progressbar">Authenticating please wait</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    
+    <string name="yourmessage">Your message</string>
+    
+    <string name="wdtitle">Widget titile</string>
 </resources>

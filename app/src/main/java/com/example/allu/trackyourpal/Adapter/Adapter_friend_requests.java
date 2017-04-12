@@ -19,12 +19,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Set;
 
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Friends;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Users;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_requests;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_your_requests;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Intent_uid;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Intent_username;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Friends;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Users;
+import static com.example.allu.trackyourpal.Utils.Attributes.Intent_uid;
+import static com.example.allu.trackyourpal.Utils.Attributes.Intent_username;
+
 
 /**
  * Created by allu on 4/9/17.
@@ -71,7 +70,7 @@ public class Adapter_friend_requests extends RecyclerView.Adapter<ViewHolder_req
                 }
             });
         }else if(user.request == 1){
-            holder.Btn_request.setText("Accept Friend");
+            holder.Btn_request.setText(context.getString(R.string.AcceptFriend));
             holder.Btn_request.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -80,7 +79,7 @@ public class Adapter_friend_requests extends RecyclerView.Adapter<ViewHolder_req
                 }
             });
         }else if(user.request == 2){
-            holder.Btn_request.setText("Request Friend");
+            holder.Btn_request.setText(context.getString(R.string.RequestFriend));
             holder.Btn_request.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

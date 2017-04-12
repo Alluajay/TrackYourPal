@@ -1,7 +1,6 @@
 package com.example.allu.trackyourpal.UI.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -17,7 +16,7 @@ import android.widget.EditText;
 import com.example.allu.trackyourpal.Adapter.Adapter_friend_requests;
 import com.example.allu.trackyourpal.POJO.User;
 import com.example.allu.trackyourpal.R;
-import com.example.allu.trackyourpal.Utils;
+import com.example.allu.trackyourpal.Utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,9 +29,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Friends;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Username;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Users;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Username;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Users;
 
 
 public class Fragment_findFriends extends Fragment {
@@ -94,7 +92,7 @@ public class Fragment_findFriends extends Fragment {
                 findFriend();
             }
         });
-        LoadContent();
+        loadContent();
         return v;
     }
 
@@ -137,7 +135,7 @@ public class Fragment_findFriends extends Fragment {
         });
     }
 
-    void LoadContent(){
+    void loadContent(){
         mDatabase.getReference().child(Fire_Users).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -165,27 +163,6 @@ public class Fragment_findFriends extends Fragment {
         });
     }
 
-    void setUidList(final String uid, final int req){
-        mDatabase.getReference().child(Fire_Users).child(uid).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                user.UID = uid;
-                user.request = req;
-                userArrayList.add(user);
-                Log.e(TAG,"added user"+user.Username+" req:"+user.request);
-                Set<User> users = new HashSet<User>(userArrayList);
-                adapter_friend_requests = new Adapter_friend_requests(users,getActivity().getApplicationContext(),mDatabase,auth);
-                recyclerView_frnd_requests.setAdapter(adapter_friend_requests);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-    }
 
 
     @Override

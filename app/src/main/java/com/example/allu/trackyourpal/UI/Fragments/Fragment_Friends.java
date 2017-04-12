@@ -1,9 +1,6 @@
 package com.example.allu.trackyourpal.UI.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
-import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,16 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.example.allu.trackyourpal.Adapter.Adapter_friend_requests;
 import com.example.allu.trackyourpal.POJO.FriendUUid;
 import com.example.allu.trackyourpal.POJO.User;
 import com.example.allu.trackyourpal.R;
-import com.example.allu.trackyourpal.UI.TourViewActivity;
-import com.google.android.gms.location.LocationListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,10 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Friends;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Username;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Users;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Intent_uid;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Friends;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Users;
 
 
 public class Fragment_Friends extends Fragment  {
@@ -109,7 +99,7 @@ public class Fragment_Friends extends Fragment  {
                     }
                     FriendsList.add(uUid);
                 }
-                FindUserFromUuid();
+                findUserFromUuid();
             }
 
             @Override
@@ -119,7 +109,7 @@ public class Fragment_Friends extends Fragment  {
         });
     }
 
-    void FindUserFromUuid(){
+    void findUserFromUuid(){
         userArrayList = new ArrayList<>();
         for (final FriendUUid uUid : FriendsList){
             reference.child(Fire_Users).child(uUid.UUid).addValueEventListener(new ValueEventListener() {

@@ -11,40 +11,50 @@
     <uses-feature android:name="android.hardware.location.gps" />
 
     <application
+        android:name=".UI.ApplicationActivity"
         android:allowBackup="true"
         android:icon="@drawable/trackicon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".UI.ApplicationActivity"
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_map_api" />
 
-        <activity android:name=".UI.SplashActivity" >
+        <activity android:name=".UI.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.LoginActivity">
-
-        </activity>
+        <activity android:name=".UI.LoginActivity"></activity>
         <activity android:name=".UI.SignupActivity" />
-        <activity android:name=".UI.GPSLocation" />
 
         <!-- service -->
-        <service android:name=".GPS.GPSTracker"></service>
+        <service android:name=".GPS.GPSTracker" />
 
         <activity android:name=".UI.AddFriend" />
         <activity android:name=".UI.TourViewActivity" />
-        <activity android:name=".UI.FriendsTourActivity" />
         <activity
             android:name=".UI.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UI.FriendRequestsActivity"></activity>
+        <activity android:name=".UI.FriendRequestsActivity" />
+
+        <receiver android:name=".widget.HomeWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/home_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".widget.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>

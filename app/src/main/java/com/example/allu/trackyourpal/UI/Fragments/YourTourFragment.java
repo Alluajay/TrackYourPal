@@ -1,21 +1,13 @@
 package com.example.allu.trackyourpal.UI.Fragments;
 
 
-import android.Manifest;
-import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -30,16 +22,13 @@ import com.example.allu.trackyourpal.Adapter.Adapter_Message;
 import com.example.allu.trackyourpal.GPS.GPSTracker;
 import com.example.allu.trackyourpal.POJO.Message;
 import com.example.allu.trackyourpal.R;
-import com.example.allu.trackyourpal.UI.TourViewActivity;
-import com.example.allu.trackyourpal.Utils;
+import com.example.allu.trackyourpal.Utils.Utils;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -52,12 +41,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Discussion;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Lat;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Long;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Online;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Tour;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Users;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Discussion;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Lat;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Long;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Online;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Tour;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Users;
 
 
 public class YourTourFragment extends Fragment implements OnMapReadyCallback{
@@ -185,7 +174,7 @@ public class YourTourFragment extends Fragment implements OnMapReadyCallback{
         Fab_sendmessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddMsg();
+                addMsg();
             }
         });
     }
@@ -268,7 +257,7 @@ public class YourTourFragment extends Fragment implements OnMapReadyCallback{
         getLatLong();
     }
 
-    void AddMsg(){
+    void addMsg(){
         String msg = Edit_message.getText().toString();
         Message message = new Message(mAuth.getCurrentUser().getUid(),msg,utils.usernameFromEmail(mAuth.getCurrentUser().getEmail()));
         mDatabase.child(Fire_Tour).child(Fire_Discussion).child(lenght+"").setValue(message);

@@ -18,7 +18,7 @@
                 android:layout_weight="60"
                 android:layout_height="wrap_content"
                 android:id="@+id/edit_findfriend"
-                android:hint="Enter friends username"/>
+                android:hint="@string/enterfriendname"/>
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_findfriend"

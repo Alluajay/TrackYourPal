@@ -1,4 +1,4 @@
-package com.example.allu.trackyourpal.User_Utils;
+package com.example.allu.trackyourpal.Utils;
 
 /**
  * Created by allu on 4/9/17.

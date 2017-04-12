@@ -11,11 +11,8 @@ import android.widget.Toast;
 
 import com.example.allu.trackyourpal.POJO.User;
 import com.example.allu.trackyourpal.R;
-import com.example.allu.trackyourpal.Utils;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.example.allu.trackyourpal.Utils.Attributes;
+import com.example.allu.trackyourpal.Utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -24,13 +21,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Friends;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Friends;
 
 public class SignupActivity extends AppCompatActivity {
 
-    String TAG = "SignupActivity";
+    String TAG = SignupActivity.class.getSimpleName();
     Utils utils;
 
     private FirebaseAuth mAuth;
@@ -59,7 +54,7 @@ public class SignupActivity extends AppCompatActivity {
         Btn_Signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Signup();
+                signup();
             }
         });
 
@@ -78,31 +73,31 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-    void Signup(){
+    void signup(){
         String Emailid = Edit_Emailid.getText().toString().trim();
         String Pass = Edit_Pass.getText().toString().trim();
         if(Emailid.isEmpty() || Emailid.equals("") || Pass.isEmpty() || Pass.equals("")){
-            utils.Toast("Enter all fields");
+            utils.toast(getString(R.string.enterallfeilds));
             return;
         }
 
         if (Pass.length() < 6) {
-            Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.passtooshort), Toast.LENGTH_SHORT).show();
             return;
         }
-        utils.ShowDialog();
+        utils.showDialog();
         mAuth.createUserWithEmailAndPassword(Emailid, Pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        utils.CloseDialog();
+                        utils.closeDialog();
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
                         if (!task.isSuccessful()) {
                             Log.e(TAG,task.toString());
-                            utils.Toast("Authentication failed!.."+task.toString());
+                            utils.toast(getString(R.string.autherror)+task.toString());
                         }else {
                             onAuthSuccess(task.getResult().getUser());
-                            utils.Toast("User created successfully!..");
+                            utils.toast(getString(R.string.usercreationsucc));
                             utils.Goto(LoginActivity.class);
                         }
                     }
@@ -111,12 +106,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private void onAuthSuccess(FirebaseUser user) {
         String username = usernameFromEmail(user.getEmail());
-
-        // Write new user
         writeNewUser(user.getUid(), username, user.getEmail());
-
-        // Go to MainActivity
-
     }
     private String usernameFromEmail(String email) {
         if (email.contains("@")) {
@@ -129,10 +119,8 @@ public class SignupActivity extends AppCompatActivity {
 
     private void writeNewUser(String userId, String name, String email) {
         User user = new User(name, email);
-
-        mDatabase.child("users").child(userId).setValue(user);
+        mDatabase.child(Attributes.Fire_Users).child(userId).setValue(user);
         mDatabase.child(Fire_Friends).child(userId);
-
     }
 
 

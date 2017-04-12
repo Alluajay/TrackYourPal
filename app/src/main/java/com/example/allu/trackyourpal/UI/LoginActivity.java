@@ -10,12 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.allu.trackyourpal.POJO.User;
 import com.example.allu.trackyourpal.R;
-import com.example.allu.trackyourpal.User_Utils.User_utils;
-import com.example.allu.trackyourpal.Utils;
+import com.example.allu.trackyourpal.Utils.Utils;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -33,13 +31,13 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Friends;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Friends;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Users;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     String TAG = "LoginActivity";
     Utils utils;
-    User_utils user_utils;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -98,19 +96,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Login();
+                login();
             }
         });
         btn_signup_default.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e(TAG,"clicked");
-                //utils.Goto(MainActivity.class);
                utils.Goto(SignupActivity.class);
             }
         });
 
-        user_utils = new User_utils(this);
         mAuth = FirebaseAuth.getInstance();
 
         if (mAuth.getCurrentUser() != null) {
@@ -131,23 +126,23 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
 
-    void Login(){
+    void login(){
         String Emailid,Password;
         Emailid = Login_email.getText().toString();
         Password = Login_password.getText().toString();
         if(Emailid.isEmpty() || Emailid.trim().equals("") || Password.isEmpty() || Password.trim().equals("")){
-            utils.Toast("Enter the Username and Password..");
+            utils.toast(getString(R.string.enteruserpass));
             return;
         }else{
-            utils.ShowDialog();
+            utils.showDialog();
             mAuth.signInWithEmailAndPassword(Emailid,Password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    utils.CloseDialog();
+                    utils.closeDialog();
                     Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
                     if (!task.isSuccessful()) {
                         Log.w(TAG, "signInWithEmail", task.getException());
-                        utils.Toast("Authentication Failed");
+                        utils.toast(getString(R.string.autherror));
                     }else{
                         utils.Goto(HomeActivity.class);
                     }
@@ -177,7 +172,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void signIn() {
-        Log.e(TAG,"signin init");
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -187,27 +181,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
         }
     }
 
-    private String usernameFromEmail(String email) {
-        if (email.contains("@")) {
-            return email.split("@")[0];
-        } else {
-            return email;
-        }
-    }
-
-
     private void writeNewUser(String userId, String name, String email) {
         User user = new User(name, email);
 
-        mDatabase.child("users").child(userId).setValue(user);
+        mDatabase.child(Fire_Users).child(userId).setValue(user);
         mDatabase.child(Fire_Friends).child(userId);
 
     }
@@ -218,10 +201,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            Log.e(TAG,"signed in");
             firebaseAuthWithGoogle(acct);
         } else {
-            utils.Toast("error in sigining up");
+            utils.toast(getString(R.string.errorinsigin));
         }
     }
 
@@ -234,19 +216,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithCredential", task.getException());
-                            utils.Toast("authentification failed"+mAuth.getCurrentUser().getUid());
+                            utils.toast("authentification failed"+mAuth.getCurrentUser().getUid());
                         }else{
-                            utils.Toast("login successfull");
+                            utils.toast(getString(R.string.loginsuccess));
                             writeNewUser(mAuth.getCurrentUser().getUid(),acct.getDisplayName(),mAuth.getCurrentUser().getEmail());
                             utils.Goto(HomeActivity.class);
                         }
-                        // ...
                     }
                 });
     }

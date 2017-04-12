@@ -3,8 +3,6 @@ package com.example.allu.trackyourpal.UI;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -27,9 +25,8 @@ import android.widget.TextView;
 import com.example.allu.trackyourpal.R;
 import com.example.allu.trackyourpal.UI.Fragments.Fragment_Friends;
 import com.example.allu.trackyourpal.UI.Fragments.Fragment_findFriends;
-import com.example.allu.trackyourpal.UI.Fragments.Fragment_settings;
 import com.example.allu.trackyourpal.UI.Fragments.YourTourFragment;
-import com.example.allu.trackyourpal.Utils;
+import com.example.allu.trackyourpal.Utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
@@ -74,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
     void RequestPermission(){
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                utils.Toast("This application requires access to Location Service.");
+                utils.toast("This application requires access to Location Service.");
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, PERMISSION_ACCESS_COARSE_LOCATION);
             }
@@ -108,9 +105,9 @@ public class HomeActivity extends AppCompatActivity {
         switch (requestCode) {
             case PERMISSION_ACCESS_COARSE_LOCATION: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    utils.Toast("Permission granted");
+                    utils.toast("Permission granted");
                 } else {
-                    utils.Toast("The app's doesn't have its full functionalities");
+                    utils.toast("The app's doesn't have its full functionalities");
                 }
                 return;
             }

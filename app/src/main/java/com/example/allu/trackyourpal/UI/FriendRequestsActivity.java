@@ -7,7 +7,7 @@ import android.util.Log;
 import com.example.allu.trackyourpal.Adapter.Adapter_friend_requests;
 import com.example.allu.trackyourpal.POJO.User;
 import com.example.allu.trackyourpal.R;
-import com.example.allu.trackyourpal.Utils;
+import com.example.allu.trackyourpal.Utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,9 +16,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Friends;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Username;
-import static com.example.allu.trackyourpal.User_Utils.Attributes.Fire_Users;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Friends;
+import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Users;
+
 
 public class FriendRequestsActivity extends AppCompatActivity {
     FirebaseAuth auth;

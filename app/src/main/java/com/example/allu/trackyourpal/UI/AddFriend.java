@@ -10,7 +10,8 @@ import android.widget.ListView;
 
 import com.example.allu.trackyourpal.POJO.User;
 import com.example.allu.trackyourpal.R;
-import com.example.allu.trackyourpal.Utils;
+import com.example.allu.trackyourpal.Utils.Attributes;
+import com.example.allu.trackyourpal.Utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -72,7 +73,7 @@ public class AddFriend extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                utils.Toast("Error in fetching the data");
+                utils.toast("Error in fetching the data");
             }
         });
 
@@ -89,24 +90,14 @@ public class AddFriend extends AppCompatActivity {
     }
 
     void AddFriendtoFirebase(User user){
-        DatabaseReference reference = mDatabase.child("users").child(auth.getCurrentUser().getUid());
-        reference.child("friends").child(user.UID).setValue(true);
+        DatabaseReference reference = mDatabase.child(Attributes.Fire_Users).child(auth.getCurrentUser().getUid());
+        reference.child(Attributes.Fire_Friends).child(user.UID).setValue(true);
     }
 
     private void writeNewUser(String userId, String name, String email) {
         User user = new User(name, email);
 
-        mDatabase.child("users").child(userId).setValue(user);
-
-        //ArrayList<String> userNames = new ArrayList<>();
-        //userNames.add(name);
-        //mDatabase.child("usernamelist").setValue(userNames);
+        mDatabase.child(Attributes.Fire_Users).child(userId).setValue(user);
     }
 
-    void PushData(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("UID");
-
-        myRef.setValue("Hello, World!");
-    }
 }
