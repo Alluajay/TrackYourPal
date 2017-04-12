@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">TrackYourPal</string>
+    <string name="apptitle">Track Your Pal !</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
@@ -9,6 +10,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="locationaccess">This application requires access to Location Service.</string>
 
     <string name="emailid">Email id</string>
     <string name="password">Password</string>
@@ -38,4 +41,7 @@
     <string name="yourmessage">Your message</string>
     
     <string name="wdtitle">Widget titile</string>
+
+    <string name="permissiongranted">Permission granted</string>
+    <string name="functionalityerror">The app\'s doesn\'t have its full functionalities</string>
 </resources>

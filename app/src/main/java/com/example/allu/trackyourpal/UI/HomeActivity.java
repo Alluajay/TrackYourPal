@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
 
         RequestPermission();
 
-        setTitle("Track Your Pal !");
+        setTitle(getString(R.string.apptitle));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -71,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
     void RequestPermission(){
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                utils.toast("This application requires access to Location Service.");
+                utils.toast(getString(R.string.locationaccess));
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, PERMISSION_ACCESS_COARSE_LOCATION);
             }
@@ -105,9 +105,9 @@ public class HomeActivity extends AppCompatActivity {
         switch (requestCode) {
             case PERMISSION_ACCESS_COARSE_LOCATION: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    utils.toast("Permission granted");
+                    utils.toast(getString(R.string.permissiongranted));
                 } else {
-                    utils.toast("The app's doesn't have its full functionalities");
+                    utils.toast(getString(R.string.functionalityerror));
                 }
                 return;
             }
