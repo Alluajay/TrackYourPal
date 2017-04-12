@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.example.allu.trackyourpal.Adapter.Adapter_friend_requests;
+import com.example.allu.trackyourpal.Adapter.AdapterFriendRequests;
 import com.example.allu.trackyourpal.POJO.User;
 import com.example.allu.trackyourpal.R;
 import com.example.allu.trackyourpal.Utils.Utils;
@@ -42,7 +42,7 @@ public class Fragment_findFriends extends Fragment {
     FirebaseAuth auth;
     ArrayList<String> UidList;
     ArrayList<User> userArrayList;
-    Adapter_friend_requests adapter_friend_requests;
+    AdapterFriendRequests adapter_friend_requests;
 
     FloatingActionButton Fab_findfriends;
     EditText Edit_query;
@@ -120,7 +120,7 @@ public class Fragment_findFriends extends Fragment {
                         userArrayList.add(user);
                         Log.e(TAG,"added user"+user.Username+" req:"+user.request);
                         Set<User> users = new HashSet<User>(userArrayList);
-                        adapter_friend_requests = new Adapter_friend_requests(users,getActivity().getApplicationContext(),mDatabase,auth);
+                        adapter_friend_requests = new AdapterFriendRequests(users,getActivity().getApplicationContext(),mDatabase,auth);
                         recyclerView_frnd_requests.setAdapter(adapter_friend_requests);
 
                     }
@@ -150,7 +150,7 @@ public class Fragment_findFriends extends Fragment {
                     userArrayList.add(user);
                     Log.e(TAG,"search added user"+user.Username+" req:"+user.request);
                     Set<User> users = new HashSet<User>(userArrayList);
-                    adapter_friend_requests = new Adapter_friend_requests(users,context,mDatabase,auth);
+                    adapter_friend_requests = new AdapterFriendRequests(users,context,mDatabase,auth);
                     recyclerView_frnd_requests.setAdapter(adapter_friend_requests);
                 }
 

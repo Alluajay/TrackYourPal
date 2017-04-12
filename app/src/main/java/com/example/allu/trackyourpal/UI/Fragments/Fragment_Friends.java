@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.allu.trackyourpal.Adapter.Adapter_friend_requests;
+import com.example.allu.trackyourpal.Adapter.AdapterFriendRequests;
 import com.example.allu.trackyourpal.POJO.FriendUUid;
 import com.example.allu.trackyourpal.POJO.User;
 import com.example.allu.trackyourpal.R;
@@ -39,7 +39,7 @@ public class Fragment_Friends extends Fragment  {
 
     ArrayList<FriendUUid> FriendsList;
     ArrayList<User> userArrayList;
-    Adapter_friend_requests adapter_friend_requests;
+    AdapterFriendRequests adapter_friend_requests;
     String[] Names;
 
 
@@ -132,7 +132,7 @@ public class Fragment_Friends extends Fragment  {
     }
 
     void setList(){
-        adapter_friend_requests = new Adapter_friend_requests(userArrayList,context,database,mAuth);
+        adapter_friend_requests = new AdapterFriendRequests(userArrayList,context,database,mAuth);
         Recy_Friends.setAdapter(adapter_friend_requests);
     }
 

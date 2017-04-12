@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.allu.trackyourpal.Adapter.Adapter_Message;
+import com.example.allu.trackyourpal.Adapter.AdapterMessage;
 import com.example.allu.trackyourpal.POJO.Message;
 import com.example.allu.trackyourpal.R;
 import com.example.allu.trackyourpal.Utils.Utils;
@@ -62,7 +62,7 @@ public class TourViewActivity extends AppCompatActivity implements OnMapReadyCal
 
     RecyclerView Recy_messages;
     ArrayList<Message> messages;
-    Adapter_Message adapter_message;
+    AdapterMessage adapter_message;
     long lenght;
 
 
@@ -88,7 +88,7 @@ public class TourViewActivity extends AppCompatActivity implements OnMapReadyCal
         Recy_messages.setLayoutManager(new GridLayoutManager(this,1));
 
         messages = new ArrayList<>();
-        adapter_message = new Adapter_Message(this,messages,mAuth);
+        adapter_message = new AdapterMessage(this,messages,mAuth);
         Recy_messages.setAdapter(adapter_message);
 
 
@@ -111,7 +111,7 @@ public class TourViewActivity extends AppCompatActivity implements OnMapReadyCal
                     Log.e(TAG,message.Message);
                     messages.add(message);
                 }
-                adapter_message = new Adapter_Message(getApplicationContext(),messages,mAuth);
+                adapter_message = new AdapterMessage(getApplicationContext(),messages,mAuth);
                 Recy_messages.setAdapter(adapter_message);
             }
 

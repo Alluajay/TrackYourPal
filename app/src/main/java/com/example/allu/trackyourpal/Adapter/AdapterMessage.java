@@ -17,25 +17,25 @@ import java.util.ArrayList;
  * Created by allu on 4/9/17.
  */
 
-public class Adapter_Message extends RecyclerView.Adapter<ViewHolder_Message>{
+public class AdapterMessage extends RecyclerView.Adapter<ViewHolderMessage>{
     Context context;
     ArrayList<Message> messages;
     FirebaseAuth mAuth;
 
-    public Adapter_Message(Context context, ArrayList<Message> messages, FirebaseAuth mAuth) {
+    public AdapterMessage(Context context, ArrayList<Message> messages, FirebaseAuth mAuth) {
         this.context = context;
         this.messages = messages;
         this.mAuth = mAuth;
     }
 
     @Override
-    public ViewHolder_Message onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolderMessage onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.single_message,parent,false);
-        return new ViewHolder_Message(v);
+        return new ViewHolderMessage(v);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder_Message holder, int position) {
+    public void onBindViewHolder(ViewHolderMessage holder, int position) {
         Message message = messages.get(position);
         if(message.Uid.equals( mAuth.getCurrentUser().getUid())){
             holder.User.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
@@ -56,9 +56,9 @@ public class Adapter_Message extends RecyclerView.Adapter<ViewHolder_Message>{
     }
 }
 
-class ViewHolder_Message extends RecyclerView.ViewHolder{
+class ViewHolderMessage extends RecyclerView.ViewHolder{
     TextView User,Message;
-    public ViewHolder_Message(View itemView) {
+    public ViewHolderMessage(View itemView) {
         super(itemView);
         User = (TextView)itemView.findViewById(R.id.txt_user);
         Message = (TextView)itemView.findViewById(R.id.txt_message);

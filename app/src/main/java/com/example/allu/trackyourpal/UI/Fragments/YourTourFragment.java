@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.example.allu.trackyourpal.Adapter.Adapter_Message;
+import com.example.allu.trackyourpal.Adapter.AdapterMessage;
 import com.example.allu.trackyourpal.GPS.GPSTracker;
 import com.example.allu.trackyourpal.POJO.Message;
 import com.example.allu.trackyourpal.R;
@@ -71,7 +71,7 @@ public class YourTourFragment extends Fragment implements OnMapReadyCallback{
 
     RecyclerView Recy_messages;
     ArrayList<Message> messages;
-    Adapter_Message adapter_message;
+    AdapterMessage adapter_message;
     long lenght;
 
     FloatingActionButton Fab_sendmessage;
@@ -148,7 +148,7 @@ public class YourTourFragment extends Fragment implements OnMapReadyCallback{
         mDatabase = FirebaseDatabase.getInstance().getReference().child(Fire_Users).child(Uid);
         mDatabase.child(Fire_Online).setValue(true);
         messages = new ArrayList<>();
-        adapter_message = new Adapter_Message(this.getActivity().getApplicationContext(),messages,mAuth);
+        adapter_message = new AdapterMessage(this.getActivity().getApplicationContext(),messages,mAuth);
 
         mDatabase.child(Fire_Tour).child(Fire_Discussion).addValueEventListener(new ValueEventListener() {
             @Override
@@ -160,7 +160,7 @@ public class YourTourFragment extends Fragment implements OnMapReadyCallback{
                     Log.e(TAG,message.Message);
                     messages.add(message);
                 }
-                adapter_message = new Adapter_Message(getActivity().getApplicationContext(),messages,mAuth);
+                adapter_message = new AdapterMessage(getActivity().getApplicationContext(),messages,mAuth);
                 Recy_messages.setAdapter(adapter_message);
             }
 

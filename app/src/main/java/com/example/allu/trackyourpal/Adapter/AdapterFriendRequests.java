@@ -29,33 +29,34 @@ import static com.example.allu.trackyourpal.Utils.Attributes.Intent_username;
  * Created by allu on 4/9/17.
  */
 
-public class Adapter_friend_requests extends RecyclerView.Adapter<ViewHolder_requests> {
+public class AdapterFriendRequests extends RecyclerView.Adapter<ViewHolderRequests> {
     ArrayList<User> userArrayList;
     Context context;
     FirebaseDatabase database;
     FirebaseAuth auth;
 
-    public Adapter_friend_requests(Set<User> userArrayList, Context context, FirebaseDatabase database, FirebaseAuth auth) {
+    public AdapterFriendRequests(Set<User> userArrayList, Context context, FirebaseDatabase database, FirebaseAuth auth) {
         this.userArrayList = new ArrayList<>(userArrayList);
         this.context = context;
         this.database = database;
         this.auth = auth;
     }
-    public Adapter_friend_requests(ArrayList<User> userArrayList, Context context, FirebaseDatabase database, FirebaseAuth auth) {
-        this.userArrayList = userArrayList;
+    public AdapterFriendRequests(ArrayList<User> userArrayList, Context context, FirebaseDatabase database, FirebaseAuth auth) {
+        this.userArrayList
+                = userArrayList;
         this.context = context;
         this.database = database;
         this.auth = auth;
     }
 
     @Override
-    public ViewHolder_requests onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolderRequests onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.single_friendrequest,parent,false);
-        return new ViewHolder_requests(v);
+        return new ViewHolderRequests(v);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder_requests holder, int position) {
+    public void onBindViewHolder(ViewHolderRequests holder, int position) {
         final User user = userArrayList.get(position);
         holder.Text_Username.setText(user.Username);
         if(user.request == 0){
@@ -97,11 +98,11 @@ public class Adapter_friend_requests extends RecyclerView.Adapter<ViewHolder_req
     }
 }
 
-class ViewHolder_requests extends RecyclerView.ViewHolder{
+class ViewHolderRequests extends RecyclerView.ViewHolder{
     TextView Text_Username;
     Button Btn_request;
     LinearLayout Lay_Single;
-    public ViewHolder_requests(View itemView) {
+    public ViewHolderRequests(View itemView) {
         super(itemView);
         Text_Username = (TextView)itemView.findViewById(R.id.txt_user);
         Btn_request = (Button)itemView.findViewById(R.id.btn_request);

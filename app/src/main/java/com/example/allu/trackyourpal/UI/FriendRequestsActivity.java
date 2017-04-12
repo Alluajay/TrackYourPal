@@ -4,7 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.allu.trackyourpal.Adapter.Adapter_friend_requests;
+
+import com.example.allu.trackyourpal.Adapter.AdapterFriendRequests;
 import com.example.allu.trackyourpal.POJO.User;
 import com.example.allu.trackyourpal.R;
 import com.example.allu.trackyourpal.Utils.Utils;
@@ -25,7 +26,7 @@ public class FriendRequestsActivity extends AppCompatActivity {
     FirebaseDatabase database;
     ArrayList<String> UidList;
     ArrayList<User> userArrayList;
-    Adapter_friend_requests adapter_friend_requests;
+    AdapterFriendRequests adapter_friend_requests;
 
     String TAG = FriendRequestsActivity.class.getSimpleName();
     Utils utils;
