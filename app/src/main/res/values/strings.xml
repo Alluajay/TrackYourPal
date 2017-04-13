@@ -44,4 +44,6 @@
 
     <string name="permissiongranted">Permission granted</string>
     <string name="functionalityerror">The app\'s doesn\'t have its full functionalities</string>
+
+    <string name="authfailed">Authentication Failed</string>
 </resources>

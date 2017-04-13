@@ -33,31 +33,31 @@ import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Username;
 import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Users;
 
 
-public class Fragment_findFriends extends Fragment {
+public class FragmentFindFriends extends Fragment {
 
-    String TAG = Fragment_findFriends.class.getSimpleName();
+    String TAG = FragmentFindFriends.class.getSimpleName();
     Context context;
     FirebaseDatabase mDatabase;
     DatabaseReference databaseReference;
     FirebaseAuth auth;
-    ArrayList<String> UidList;
+    ArrayList<String> uidList;
     ArrayList<User> userArrayList;
     AdapterFriendRequests adapter_friend_requests;
 
-    FloatingActionButton Fab_findfriends;
-    EditText Edit_query;
+    FloatingActionButton fabFindfriends;
+    EditText editQuery;
 
     Utils utils;
 
 
     RecyclerView recyclerView_frnd_requests;
 
-     public Fragment_findFriends() {
+     public FragmentFindFriends() {
         // Required empty public constructor
      }
 
-    public static Fragment_findFriends newInstance(String param1, String param2) {
-        Fragment_findFriends fragment = new Fragment_findFriends();
+    public static FragmentFindFriends newInstance(String param1, String param2) {
+        FragmentFindFriends fragment = new FragmentFindFriends();
         return fragment;
     }
 
@@ -66,7 +66,7 @@ public class Fragment_findFriends extends Fragment {
         super.onCreate(savedInstanceState);
         context = getContext();
         utils = new Utils(context);
-        UidList = new ArrayList<>();
+        uidList = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance();
         databaseReference = mDatabase.getReference();
         auth = FirebaseAuth.getInstance();
@@ -84,9 +84,9 @@ public class Fragment_findFriends extends Fragment {
         recyclerView_frnd_requests.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(),1));
         recyclerView_frnd_requests.setHasFixedSize(false);
 
-        Edit_query = (EditText)v.findViewById(R.id.edit_findfriend);
-        Fab_findfriends = (FloatingActionButton)v.findViewById(R.id.fab_findfriend);
-        Fab_findfriends.setOnClickListener(new View.OnClickListener() {
+        editQuery = (EditText)v.findViewById(R.id.edit_findfriend);
+        fabFindfriends = (FloatingActionButton)v.findViewById(R.id.fab_findfriend);
+        fabFindfriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 findFriend();
@@ -98,7 +98,7 @@ public class Fragment_findFriends extends Fragment {
 
     void findFriend(){
         Log.e(TAG,"search init");
-        String query_string = Edit_query.getText().toString();
+        String query_string = editQuery.getText().toString();
         if(utils.isEmptyString(query_string)){
             return;
         }

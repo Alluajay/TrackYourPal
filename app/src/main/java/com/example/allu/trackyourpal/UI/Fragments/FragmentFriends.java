@@ -28,28 +28,27 @@ import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Friends;
 import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Users;
 
 
-public class Fragment_Friends extends Fragment  {
+public class FragmentFriends extends Fragment  {
 
-    String TAG = Fragment_Friends.class.getSimpleName();
+    String TAG = FragmentFriends.class.getSimpleName();
     Context context;
     DatabaseReference reference;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
-    RecyclerView Recy_Friends;
+    RecyclerView recyFriends;
 
-    ArrayList<FriendUUid> FriendsList;
+    ArrayList<FriendUUid> friendsList;
     ArrayList<User> userArrayList;
     AdapterFriendRequests adapter_friend_requests;
-    String[] Names;
 
 
-    public Fragment_Friends() {
+    public FragmentFriends() {
         // Required empty public constructor
     }
 
 
-    public static Fragment_Friends newInstance(String param1, String param2) {
-        Fragment_Friends fragment = new Fragment_Friends();
+    public static FragmentFriends newInstance(String param1, String param2) {
+        FragmentFriends fragment = new FragmentFriends();
         return fragment;
     }
 
@@ -59,7 +58,7 @@ public class Fragment_Friends extends Fragment  {
         reference = FirebaseDatabase.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        FriendsList = new ArrayList<>();
+        friendsList = new ArrayList<>();
         userArrayList = new ArrayList<>();
 
     }
@@ -71,12 +70,12 @@ public class Fragment_Friends extends Fragment  {
         Log.e("friends","init");
         View v = inflater.inflate(R.layout.fragment_fragment__friends, container, false);
         context = v.getContext();
-        Recy_Friends = (RecyclerView)v.findViewById(R.id.recy_friend);
-        Recy_Friends.setItemAnimator(new DefaultItemAnimator());
-        Recy_Friends.setHasFixedSize(false);
+        recyFriends = (RecyclerView)v.findViewById(R.id.recy_friend);
+        recyFriends.setItemAnimator(new DefaultItemAnimator());
+        recyFriends.setHasFixedSize(false);
 
-        Recy_Friends.setLayoutManager(new GridLayoutManager(context,1));
-        FriendsList = new ArrayList<>();
+        recyFriends.setLayoutManager(new GridLayoutManager(context,1));
+        friendsList = new ArrayList<>();
         userArrayList = new ArrayList<>();
         LoadContent1();
         return v;
@@ -87,7 +86,7 @@ public class Fragment_Friends extends Fragment  {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.e(TAG,"freinds found"+dataSnapshot.toString());
-                FriendsList = new ArrayList<FriendUUid>();
+                friendsList = new ArrayList<FriendUUid>();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     FriendUUid uUid = new FriendUUid();
                     if(snapshot.getValue().equals("req")){
@@ -97,7 +96,7 @@ public class Fragment_Friends extends Fragment  {
                        // setUidList(snapshot.getKey(),0);
                         uUid = new FriendUUid(snapshot.getKey(),0);
                     }
-                    FriendsList.add(uUid);
+                    friendsList.add(uUid);
                 }
                 findUserFromUuid();
             }
@@ -111,7 +110,7 @@ public class Fragment_Friends extends Fragment  {
 
     void findUserFromUuid(){
         userArrayList = new ArrayList<>();
-        for (final FriendUUid uUid : FriendsList){
+        for (final FriendUUid uUid : friendsList){
             reference.child(Fire_Users).child(uUid.UUid).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -133,13 +132,13 @@ public class Fragment_Friends extends Fragment  {
 
     void setList(){
         adapter_friend_requests = new AdapterFriendRequests(userArrayList,context,database,mAuth);
-        Recy_Friends.setAdapter(adapter_friend_requests);
+        recyFriends.setAdapter(adapter_friend_requests);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        FriendsList = new ArrayList<>();
+        friendsList = new ArrayList<>();
     }
 
     @Override
@@ -156,7 +155,7 @@ public class Fragment_Friends extends Fragment  {
     @Override
     public void onDetach() {
         super.onDetach();
-        FriendsList = new ArrayList<>();
+        friendsList = new ArrayList<>();
     }
 
 }

@@ -30,9 +30,7 @@ public class AddFriend extends AppCompatActivity {
 
     ArrayList<User> userArrayList;
     ArrayList<String> username;
-    ListView List_friends;
-
-    ArrayAdapter<String> adapter;
+    ListView listFriends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +43,7 @@ public class AddFriend extends AppCompatActivity {
 
 
 
-        List_friends = (ListView)findViewById(R.id.list_friends);
+        listFriends = (ListView)findViewById(R.id.list_friends);
 
 
         mDatabase.child("users").addValueEventListener(new ValueEventListener() {
@@ -67,7 +65,7 @@ public class AddFriend extends AppCompatActivity {
                     names[i] = userArrayList.get(i).Username;
                 }
                 ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_2, names);
-                List_friends.setAdapter(adapter);
+                listFriends.setAdapter(adapter);
                 AdapterClick();
             }
 
@@ -80,7 +78,7 @@ public class AddFriend extends AppCompatActivity {
     }
 
     void AdapterClick(){
-        List_friends.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listFriends.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.e(TAG,username.get(i));
@@ -92,12 +90,6 @@ public class AddFriend extends AppCompatActivity {
     void AddFriendtoFirebase(User user){
         DatabaseReference reference = mDatabase.child(Attributes.Fire_Users).child(auth.getCurrentUser().getUid());
         reference.child(Attributes.Fire_Friends).child(user.UID).setValue(true);
-    }
-
-    private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email);
-
-        mDatabase.child(Attributes.Fire_Users).child(userId).setValue(user);
     }
 
 }

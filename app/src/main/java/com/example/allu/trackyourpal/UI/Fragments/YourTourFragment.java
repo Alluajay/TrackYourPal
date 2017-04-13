@@ -63,13 +63,12 @@ public class YourTourFragment extends Fragment implements OnMapReadyCallback{
     FirebaseAuth mAuth;
 
     double lat, longi;
-    LatLng latLng;
 
     GoogleMap googleMap;
 
     EditText Edit_message;
 
-    RecyclerView Recy_messages;
+    RecyclerView recy_messages;
     ArrayList<Message> messages;
     AdapterMessage adapter_message;
     long lenght;
@@ -126,12 +125,12 @@ public class YourTourFragment extends Fragment implements OnMapReadyCallback{
         mMapView.getMapAsync(this);
 
 
-        Recy_messages = (RecyclerView)v.findViewById(R.id.recy_message);
+        recy_messages = (RecyclerView)v.findViewById(R.id.recy_message);
         Fab_sendmessage = (FloatingActionButton)v.findViewById(R.id.fab_sendmsg);
-        Recy_messages.setHasFixedSize(false);
-        Recy_messages.setItemAnimator(new DefaultItemAnimator());
-        Recy_messages.setLayoutManager(new GridLayoutManager(this.getActivity().getApplicationContext(),1));
-        Recy_messages.setAdapter(adapter_message);
+        recy_messages.setHasFixedSize(false);
+        recy_messages.setItemAnimator(new DefaultItemAnimator());
+        recy_messages.setLayoutManager(new GridLayoutManager(this.getActivity().getApplicationContext(),1));
+        recy_messages.setAdapter(adapter_message);
 
 
         loadContent();
@@ -161,7 +160,7 @@ public class YourTourFragment extends Fragment implements OnMapReadyCallback{
                     messages.add(message);
                 }
                 adapter_message = new AdapterMessage(getActivity().getApplicationContext(),messages,mAuth);
-                Recy_messages.setAdapter(adapter_message);
+                recy_messages.setAdapter(adapter_message);
             }
 
             @Override

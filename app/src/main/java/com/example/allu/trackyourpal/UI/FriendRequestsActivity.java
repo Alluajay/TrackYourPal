@@ -26,7 +26,6 @@ public class FriendRequestsActivity extends AppCompatActivity {
     FirebaseDatabase database;
     ArrayList<String> UidList;
     ArrayList<User> userArrayList;
-    AdapterFriendRequests adapter_friend_requests;
 
     String TAG = FriendRequestsActivity.class.getSimpleName();
     Utils utils;

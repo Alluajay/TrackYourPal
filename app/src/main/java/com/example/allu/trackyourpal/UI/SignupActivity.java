@@ -32,8 +32,8 @@ public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
 
-    EditText Edit_Emailid,Edit_Pass;
-    Button Btn_Signup;
+    EditText editEmailid, editPass;
+    Button btnSignup;
 
 
     @Override
@@ -46,12 +46,12 @@ public class SignupActivity extends AppCompatActivity {
 
 
 
-        Edit_Emailid = (EditText)findViewById(R.id.edit_email);
-        Edit_Pass = (EditText)findViewById(R.id.edit_password);
+        editEmailid = (EditText)findViewById(R.id.edit_email);
+        editPass = (EditText)findViewById(R.id.edit_password);
 
-        Btn_Signup = (Button)findViewById(R.id.btn_signup);
+        btnSignup = (Button)findViewById(R.id.btn_signup);
 
-        Btn_Signup.setOnClickListener(new View.OnClickListener() {
+        btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signup();
@@ -74,8 +74,8 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     void signup(){
-        String Emailid = Edit_Emailid.getText().toString().trim();
-        String Pass = Edit_Pass.getText().toString().trim();
+        String Emailid = editEmailid.getText().toString().trim();
+        String Pass = editPass.getText().toString().trim();
         if(Emailid.isEmpty() || Emailid.equals("") || Pass.isEmpty() || Pass.equals("")){
             utils.toast(getString(R.string.enterallfeilds));
             return;

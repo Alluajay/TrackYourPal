@@ -36,17 +36,17 @@ import static com.example.allu.trackyourpal.Utils.Attributes.Fire_Users;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
-    String TAG = "LoginActivity";
+    String TAG = LoginActivity.class.getSimpleName();
     Utils utils;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    TextView LoginTitle;
-    Typeface Login_typeface;
+    TextView loginTitle;
+    Typeface loginTypeface;
 
-    Button Login_button,btn_signup_default;
-    EditText Login_email,Login_password;
+    Button loginButton,btn_signup_default;
+    EditText loginEmail, loginPassword;
     SignInButton signInButton;
 
     int RC_SIGN_IN = 100;
@@ -84,16 +84,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        LoginTitle = (TextView)findViewById(R.id.txt_login_title);
-        Login_typeface = Typeface.createFromAsset(getAssets(),"fonts/Gorditas-Regular.ttf");
-        LoginTitle.setTypeface(Login_typeface);
+        loginTitle = (TextView)findViewById(R.id.txt_login_title);
+        loginTypeface = Typeface.createFromAsset(getAssets(),"fonts/Gorditas-Regular.ttf");
+        loginTitle.setTypeface(loginTypeface);
 
-        Login_button = (Button)findViewById(R.id.btn_login);
-        Login_email = (EditText)findViewById(R.id.edit_email);
-        Login_password = (EditText)findViewById(R.id.edit_password);
+        loginButton = (Button)findViewById(R.id.btn_login);
+        loginEmail = (EditText)findViewById(R.id.edit_email);
+        loginPassword = (EditText)findViewById(R.id.edit_password);
         btn_signup_default = (Button)findViewById(R.id.btn_signup_default);
 
-        Login_button.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 login();
@@ -128,8 +128,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     void login(){
         String Emailid,Password;
-        Emailid = Login_email.getText().toString();
-        Password = Login_password.getText().toString();
+        Emailid = loginEmail.getText().toString();
+        Password = loginPassword.getText().toString();
         if(Emailid.isEmpty() || Emailid.trim().equals("") || Password.isEmpty() || Password.trim().equals("")){
             utils.toast(getString(R.string.enteruserpass));
             return;
@@ -218,7 +218,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithCredential", task.getException());
-                            utils.toast("authentification failed"+mAuth.getCurrentUser().getUid());
+                            utils.toast(getString(R.string.autherror)+mAuth.getCurrentUser().getUid());
                         }else{
                             utils.toast(getString(R.string.loginsuccess));
                             writeNewUser(mAuth.getCurrentUser().getUid(),acct.getDisplayName(),mAuth.getCurrentUser().getEmail());

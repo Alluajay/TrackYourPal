@@ -58,10 +58,10 @@ public class AdapterFriendRequests extends RecyclerView.Adapter<ViewHolderReques
     @Override
     public void onBindViewHolder(ViewHolderRequests holder, int position) {
         final User user = userArrayList.get(position);
-        holder.Text_Username.setText(user.Username);
+        holder.textUsername.setText(user.Username);
         if(user.request == 0){
-            holder.Btn_request.setVisibility(View.GONE);
-            holder.Lay_Single.setOnClickListener(new View.OnClickListener() {
+            holder.btnRequest.setVisibility(View.GONE);
+            holder.laySingle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent i = new Intent(context, TourViewActivity.class);
@@ -71,8 +71,8 @@ public class AdapterFriendRequests extends RecyclerView.Adapter<ViewHolderReques
                 }
             });
         }else if(user.request == 1){
-            holder.Btn_request.setText(context.getString(R.string.AcceptFriend));
-            holder.Btn_request.setOnClickListener(new View.OnClickListener() {
+            holder.btnRequest.setText(context.getString(R.string.AcceptFriend));
+            holder.btnRequest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     database.getReference().child(Fire_Users).child(user.UID).child(Fire_Friends).child(auth.getCurrentUser().getUid()).setValue(true);
@@ -80,8 +80,8 @@ public class AdapterFriendRequests extends RecyclerView.Adapter<ViewHolderReques
                 }
             });
         }else if(user.request == 2){
-            holder.Btn_request.setText(context.getString(R.string.RequestFriend));
-            holder.Btn_request.setOnClickListener(new View.OnClickListener() {
+            holder.btnRequest.setText(context.getString(R.string.RequestFriend));
+            holder.btnRequest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     database.getReference().child(Fire_Users).child(user.UID).child(Fire_Friends).child(auth.getCurrentUser().getUid()).setValue("req");
@@ -99,13 +99,13 @@ public class AdapterFriendRequests extends RecyclerView.Adapter<ViewHolderReques
 }
 
 class ViewHolderRequests extends RecyclerView.ViewHolder{
-    TextView Text_Username;
-    Button Btn_request;
-    LinearLayout Lay_Single;
+    TextView textUsername;
+    Button btnRequest;
+    LinearLayout laySingle;
     public ViewHolderRequests(View itemView) {
         super(itemView);
-        Text_Username = (TextView)itemView.findViewById(R.id.txt_user);
-        Btn_request = (Button)itemView.findViewById(R.id.btn_request);
-        Lay_Single = (LinearLayout)itemView.findViewById(R.id.lay_singlefriendrequest);
+        textUsername = (TextView)itemView.findViewById(R.id.txt_user);
+        btnRequest = (Button)itemView.findViewById(R.id.btn_request);
+        laySingle = (LinearLayout)itemView.findViewById(R.id.lay_singlefriendrequest);
     }
 }

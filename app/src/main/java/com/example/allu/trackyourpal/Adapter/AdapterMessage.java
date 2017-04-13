@@ -38,11 +38,11 @@ public class AdapterMessage extends RecyclerView.Adapter<ViewHolderMessage>{
     public void onBindViewHolder(ViewHolderMessage holder, int position) {
         Message message = messages.get(position);
         if(message.Uid.equals( mAuth.getCurrentUser().getUid())){
-            holder.User.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
-            holder.Message.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+            holder.user.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+            holder.message.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
         }
-        holder.User.setText(message.Username);
-        holder.Message.setText(message.Message);
+        holder.user.setText(message.Username);
+        holder.message.setText(message.Message);
     }
 
     @Override
@@ -57,10 +57,10 @@ public class AdapterMessage extends RecyclerView.Adapter<ViewHolderMessage>{
 }
 
 class ViewHolderMessage extends RecyclerView.ViewHolder{
-    TextView User,Message;
+    TextView user, message;
     public ViewHolderMessage(View itemView) {
         super(itemView);
-        User = (TextView)itemView.findViewById(R.id.txt_user);
-        Message = (TextView)itemView.findViewById(R.id.txt_message);
+        user = (TextView)itemView.findViewById(R.id.txt_user);
+        message = (TextView)itemView.findViewById(R.id.txt_message);
     }
 }

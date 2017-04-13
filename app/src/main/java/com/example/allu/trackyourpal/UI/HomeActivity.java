@@ -23,8 +23,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.allu.trackyourpal.R;
-import com.example.allu.trackyourpal.UI.Fragments.Fragment_Friends;
-import com.example.allu.trackyourpal.UI.Fragments.Fragment_findFriends;
+
+import com.example.allu.trackyourpal.UI.Fragments.FragmentFindFriends;
+import com.example.allu.trackyourpal.UI.Fragments.FragmentFriends;
 import com.example.allu.trackyourpal.UI.Fragments.YourTourFragment;
 import com.example.allu.trackyourpal.Utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
@@ -115,31 +116,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    public static class PlaceholderFragment extends Fragment {
-
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-    }
-
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -151,14 +127,11 @@ public class HomeActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    // Top Rated fragment activity
                     return new YourTourFragment();
                 case 1:
-                    // Games fragment activity
-                    return new Fragment_Friends();
+                    return new FragmentFriends();
                 case 2:
-                    // Movies fragment activity
-                    return new Fragment_findFriends();
+                    return new FragmentFindFriends();
 
                 default:
                     return null;
@@ -167,7 +140,6 @@ public class HomeActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 3;
         }
 

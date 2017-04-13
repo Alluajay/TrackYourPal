@@ -19,17 +19,17 @@ public class SplashActivity extends AwesomeSplash {
 
         getSupportActionBar().hide();
 
-        configSplash.setBackgroundColor(R.color.colorPrimary); //any color you want form colors.xml
-        configSplash.setAnimCircularRevealDuration(2000); //int ms
-        configSplash.setRevealFlagX(Flags.REVEAL_RIGHT);  //or Flags.REVEAL_LEFT
-        configSplash.setRevealFlagY(Flags.REVEAL_BOTTOM); //or Flags.REVEAL_TOP
+        configSplash.setBackgroundColor(R.color.colorPrimary);
+        configSplash.setAnimCircularRevealDuration(2000);
+        configSplash.setRevealFlagX(Flags.REVEAL_RIGHT);
+        configSplash.setRevealFlagY(Flags.REVEAL_BOTTOM);
 
         configSplash.setTitleSplash("Track Your Pal");
         configSplash.setTitleTextColor(R.color.colorAccent);
-        configSplash.setTitleTextSize(40f); //float value
+        configSplash.setTitleTextSize(40f);
         configSplash.setAnimTitleDuration(2000);
         configSplash.setAnimTitleTechnique(Techniques.FadeInLeft);
-        configSplash.setTitleFont("fonts/Gorditas-Regular.ttf"); //provide string to your font located in assets/fonts/
+        configSplash.setTitleFont("fonts/Gorditas-Regular.ttf");
     }
 
     @Override
