@@ -39,6 +39,8 @@
     <string name="add_widget">Add widget</string>
     
     <string name="yourmessage">Your message</string>
+    <string name="user">User</string>
+    <string name="message">Message</string>
     
     <string name="wdtitle">Widget titile</string>
 
@@ -46,4 +48,11 @@
     <string name="functionalityerror">The app\'s doesn\'t have its full functionalities</string>
 
     <string name="authfailed">Authentication Failed</string>
+
+    <string name="alerttitle">GPS is settings</string>
+    <string name="alertString">GPS is not enabled. Do you want to go to settings menu?</string>
+    
+    <string name="settings">Settings</string>
+    <string name="cancel">Cancel</string>
+
 </resources>

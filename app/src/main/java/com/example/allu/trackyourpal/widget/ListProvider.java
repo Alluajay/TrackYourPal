@@ -68,7 +68,7 @@ public class ListProvider implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public RemoteViews getViewAt(int position) {
-        final RemoteViews remoteView = new RemoteViews(context.getPackageName(), R.layout.single_message);
+        final RemoteViews remoteView = new RemoteViews(context.getPackageName(), R.layout.single_message_widget);
         Message message = messageArrayList.get(position);
         remoteView.setTextViewText(R.id.txt_user, message.Username);
         remoteView.setTextViewText(R.id.txt_message, message.Message);
